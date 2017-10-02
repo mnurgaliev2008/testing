@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20171002 14:17:40.575" generator="Robot 3.0.2 (Python 2.7.9 on linux2)">
+<suite source="/home/nurgaliev/PycharmProjects/testing/test.robot" id="s1" name="Test">
+<test id="s1-t1" name="ServiceActivation">
+<kw type="setup" name="Connect To Db" library="Keywords">
+<status status="PASS" endtime="20171002 14:17:40.601" starttime="20171002 14:17:40.601"></status>
+</kw>
+<kw name="Get Active Client" library="Keywords">
+<assign>
+<var>${client}</var>
+</assign>
+<msg timestamp="20171002 14:17:40.602" level="INFO">${client} = &lt;Keywords.Client instance at 0x7f048db21560&gt;</msg>
+<status status="PASS" endtime="20171002 14:17:40.602" starttime="20171002 14:17:40.602"></status>
+</kw>
+<kw name="Should Not Be Equal As Numbers" library="BuiltIn">
+<doc>Fails if objects are equal after converting them to real numbers.</doc>
+<arguments>
+<arg>${client.client_id}</arg>
+<arg>0</arg>
+</arguments>
+<msg timestamp="20171002 14:17:40.602" level="INFO">Argument types are:
+&lt;type 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20171002 14:17:40.602" starttime="20171002 14:17:40.602"></status>
+</kw>
+<kw name="Get Services" library="Keywords">
+<arguments>
+<arg>${client.client_id}</arg>
+</arguments>
+<assign>
+<var>${current_client_services}</var>
+</assign>
+<msg timestamp="20171002 14:17:40.607" level="INFO">${current_client_services} = [{u'cost': 1.2, u'id': 1, u'name': u'Service #1'}]</msg>
+<status status="PASS" endtime="20171002 14:17:40.607" starttime="20171002 14:17:40.603"></status>
+</kw>
+<kw name="Get Services" library="Keywords">
+<assign>
+<var>${all_services}</var>
+</assign>
+<msg timestamp="20171002 14:17:40.609" level="INFO">${all_services} = [{u'cost': 1.2, u'id': 1, u'name': u'Service #1'}, {u'cost': 0.35, u'id': 2, u'name': u'Service #2'}, {u'cost': 0.15, u'id': 3, u'name': u'Service #3'}, {u'cost': 0.15, u'id': 4, u'name': u'Service #4...</msg>
+<status status="PASS" endtime="20171002 14:17:40.609" starttime="20171002 14:17:40.607"></status>
+</kw>
+<kw name="Get Random Off Service" library="Keywords">
+<arguments>
+<arg>${all_services}</arg>
+<arg>${current_client_services}</arg>
+</arguments>
+<assign>
+<var>${random_service_off}</var>
+</assign>
+<msg timestamp="20171002 14:17:40.610" level="INFO">${random_service_off} = [3, 0.15]</msg>
+<status status="PASS" endtime="20171002 14:17:40.610" starttime="20171002 14:17:40.610"></status>
+</kw>
+<kw name="Activate New Service And Check It" library="Keywords">
+<arguments>
+<arg>${client.client_id}</arg>
+<arg>${random_service_off[0]}</arg>
+</arguments>
+<assign>
+<var>${ans}</var>
+</assign>
+<msg timestamp="20171002 14:17:46.649" level="INFO">${ans} = 1</msg>
+<status status="PASS" endtime="20171002 14:17:46.649" starttime="20171002 14:17:40.610"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>${ans}</arg>
+</arguments>
+<status status="PASS" endtime="20171002 14:17:46.650" starttime="20171002 14:17:46.649"></status>
+</kw>
+<kw name="Check Balance" library="Keywords">
+<arguments>
+<arg>${client}</arg>
+<arg>${random_service_off[1]}</arg>
+</arguments>
+<assign>
+<var>${ans}</var>
+</assign>
+<msg timestamp="20171002 14:17:46.651" level="FAIL">Wrong balance for client 3 after activate service</msg>
+<status status="FAIL" endtime="20171002 14:17:46.652" starttime="20171002 14:17:46.650"></status>
+</kw>
+<status status="FAIL" endtime="20171002 14:17:46.652" critical="yes" starttime="20171002 14:17:40.601">Wrong balance for client 3 after activate service</status>
+</test>
+<status status="FAIL" endtime="20171002 14:17:46.653" starttime="20171002 14:17:40.577"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="1" id="s1" name="Test" pass="0">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
